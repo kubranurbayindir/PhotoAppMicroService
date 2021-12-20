@@ -46,6 +46,14 @@ spring:
         - Method=GET,POST,PUT,DELETE
         filters:
         - RewritePath=/account-ws/(?<segment>.*), /$\{segment}
+                
+      - id: account-ws-getById
+        uri: lb://account-ws
+        predicates:
+        - Path=/account-ws/accounttypes/*
+        - Method=GET
+        filters:
+        - RewritePath=/account-ws/(?<segment>.*), /$\{segment}
         
 eureka:
   client:
